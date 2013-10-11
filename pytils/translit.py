@@ -5,9 +5,10 @@ Simple transliteration
 """
 
 import re
-from pytils.utils import takes, returns
 
 TRANSTABLE = (
+        (u".", u"."),
+        (u"_", u"_"),
         (u"'", u"'"),
         (u'"', u'"'),
         (u"‘", u"'"),
@@ -132,8 +133,6 @@ RU_ALPHABET = [x[0] for x in TRANSTABLE] #: Russian alphabet that we can transla
 EN_ALPHABET = [x[1] for x in TRANSTABLE] #: English alphabet that we can detransliterate
 ALPHABET = RU_ALPHABET + EN_ALPHABET #: Alphabet that we can (de)transliterate
 
-@takes(unicode)
-@returns(str)
 def translify(in_string):
     """
     Translify russian text
@@ -160,8 +159,6 @@ def translify(in_string):
 
     return translit
 
-@takes(basestring)
-@returns(unicode)
 def detranslify(in_string):
     """
     Detranslify
@@ -189,8 +186,6 @@ def detranslify(in_string):
 
     return russian
 
-@takes(basestring)
-@returns(str)
 def slugify(in_string):
     """
     Prepare string for slug (i.e. URL or file/dir name)
@@ -206,7 +201,7 @@ def slugify(in_string):
     @raise ValueError: if in_string is C{str}, but it isn't ascii
     """
     try:
-        u_in_string = unicode(in_string).lower()
+        u_in_string = unicode(in_string)
     except UnicodeDecodeError:
         raise ValueError("We expects when in_string is str type," + \
                          "it is an ascii, but now it isn't. Use unicode " + \
@@ -220,11 +215,6 @@ def slugify(in_string):
     # translify it
     out_string = translify(u_in_string)
     # remove non-alpha
-    return re.sub('[^\w\s-]', '', out_string).strip().lower()
+    #return re.sub('[^\w\s-]', '', out_string).strip().lower()
+    return out_string
 
-
-def dirify(in_string):
-    """
-    Alias for L{slugify}
-    """
-    slugify(in_string)
