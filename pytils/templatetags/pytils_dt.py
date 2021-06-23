@@ -5,7 +5,7 @@ pytils.dt templatetags for Django web-framework
 """
 
 import time
-from django import template, conf
+from django import template, conf, utils
 from pytils import dt
 from pytils.templatetags import init_defaults
 
@@ -31,8 +31,11 @@ def distance_of_time(from_time, accuracy=1):
         {{ some_dtime|distance_of_time:2 }}
     """
     try:
-        res = dt.distance_of_time_in_words(from_time, accuracy)
-    except Exception, err:
+        to_time = None
+        if conf.settings.USE_TZ:
+            to_time=utils.timezone.now()
+        res = dt.distance_of_time_in_words(from_time, accuracy, to_time)
+    except Exception as err:
         # because filter must die silently
         try:
             default_distance = "%s seconds" % str(int(time.time() - from_time))
@@ -59,7 +62,7 @@ def ru_strftime(date, format="%d.%m.%Y", inflected_day=False, preposition=False)
                              inflected=True,
                              inflected_day=inflected_day,
                              preposition=preposition)
-    except Exception, err:
+    except Exception as err:
         # because filter must die silently
         try:
             default_date = date.strftime(format)

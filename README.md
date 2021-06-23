@@ -7,12 +7,12 @@ russian dates, etc)
 
 See additional docs in doc subdir.
 
-CI status: [![Build Status](https://secure.travis-ci.org/j2a/pytils.png?branch=master)](http://travis-ci.org/j2a/pytils)
+CI status: [![Build Status](https://secure.travis-ci.org/last-partizan/pytils.png?branch=master)](http://travis-ci.org/last-partizan/pytils)
 
 -----
 
 Pytils это инструменты для работы 
 с русскими строками (транслитерация,
-числительные слоами, русские даты и т.д.)
+числительные словами, русские даты и т.д.)
 
 Документацию смотрите в каталоге doc

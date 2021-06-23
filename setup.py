@@ -6,25 +6,25 @@ if use_setuptools:
     try:
         from setuptools import setup
     except ImportError:
-        print "Cannot load setuptool, revert to distutils"
+        print("Cannot load setuptool, revert to distutils")
         use_setuptools = False
         from distutils.core import setup
 else:
     from distutils.core import setup
 
-version = "0.2.4"
+version = "0.3.2"
 
 setup_data = {
       'name': 'pytils',
       'version': version,
       'author': 'Yury Yurevich',
-      'author_email': 'the.pythy@gmail.com',
-      'url': 'http://www.pyobject.ru/projects/pytils/',
+      'author_email': 'yyurevich@jellycrystal.com',
+      'url': 'https://github.com/j2a/pytils/',
       'description': 'Russian-specific string utils',
       'long_description': """Simple tools for processing strings in russian
 (choose proper form for plurals, in-words representation of numerals,
 dates in russian without locales, transliteration, etc)""",
-      'packages': ['pytils', 'pytils.templatetags', 'pytils.test', 'pytils.test.templatetags', 'pytils.third'],
+      'packages': ['pytils', 'pytils.templatetags', 'pytils.test', 'pytils.test.templatetags'],
       'license': "MIT",
       'platforms': "All",
       'classifiers': [
@@ -33,6 +33,10 @@ dates in russian without locales, transliteration, etc)""",
           'License :: OSI Approved :: MIT License',
           'Operating System :: OS Independent',
           'Programming Language :: Python',
+          'Programming Language :: Python :: 3',
+          'Programming Language :: Python :: 3.6',
+          'Programming Language :: Python :: 3.7',
+          'Programming Language :: Python :: 3.8',
           'Natural Language :: Russian',
           'Development Status :: 4 - Beta',
           'Intended Audience :: Developers',

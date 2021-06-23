@@ -51,5 +51,5 @@ class TemplateTagTestCase(unittest.TestCase):
         loader.template_source_loaders = [test_template_loader,]
         
         output = loader.get_template(template_name).render(template.Context(context))
-        self.assertEquals(output, result_string)
+        self.assertEqual(output, result_string)
 

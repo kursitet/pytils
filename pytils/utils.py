@@ -4,12 +4,7 @@
 Misc utils for internal use
 """
 
-from decimal import Decimal
-from pytils.third.aspn426123 import takes, returns, optional, list_of, tuple_of, \
-                                    nothing, one_of
 
-
-@takes((basestring, tuple, list), (int, long))
 def check_length(value, length):
     """
     Checks length of value
@@ -30,13 +25,12 @@ def check_length(value, length):
                          (length, _length))
 
 
-@takes((int,long,float,Decimal), optional(bool), strict=optional(bool))
 def check_positive(value, strict=False):
     """
     Checks if variable is positive
 
     @param value: value to check
-    @type value: C{int}, C{long}, C{float} or C{Decimal}
+    @type value: C{integer types}, C{float} or C{Decimal}
 
     @return: None when check successful
 
@@ -48,8 +42,7 @@ def check_positive(value, strict=False):
         raise ValueError("Value must be positive, not %s" % str(value))
 
 
-@takes(unicode, optional(unicode), sep=optional(unicode))
-def split_values(ustring, sep=u','):
+def split_values(ustring, sep=','):
     """
     Splits unicode string with separator C{sep},
     but skips escaped separator.
@@ -62,9 +55,8 @@ def split_values(ustring, sep=u','):
     
     @return: tuple of splitted elements
     """
-    assert isinstance(ustring, unicode), "uvalue must be unicode, not %s" % type(ustring)
+    assert isinstance(ustring, str), "uvalue must be str, not %s" % type(ustring)
     # unicode have special mark symbol 0xffff which cannot be used in a regular text,
     # so we use it to mark a place where escaped column was
-    ustring_marked = ustring.replace(u'\,', u'\uffff')
-    items = tuple([i.strip().replace(u'\uffff', u',') for i in ustring_marked.split(sep)])
-    return items
+    ustring_marked = ustring.replace(r'\,', '\uffff')
+    return tuple(i.strip().replace('\uffff', ',') for i in ustring_marked.split(sep))
